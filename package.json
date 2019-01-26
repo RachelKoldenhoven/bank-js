@@ -1,0 +1,14 @@
+{
+  "name": "bank-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "RachelKoldenhoven <rachel@koldenfrozen.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
