@@ -16,21 +16,37 @@ class Bank {
         }
     }
 
-    parse() {
+    readEntriesFromFile() {
         // get big string from file
-        // could not get space at end of line, added on at begin of line 2 in txt file
-        let entries = fs.readFileSync('entries.txt', 'utf8');
+        return fs.readFileSync('entries.txt', 'utf8');
+    }
+
+    divideEntries(string) {
+        // take giant string and break into accounts by double newline
+        let entryArr = string.split('\n\n');
+        // remove last entry which is an empty string after the last newline
+        entryArr.pop();
+        return entryArr;
+    }
+
+    transformEntry(entry) {
         // remove newline chars and change to letters
-        let a = entries.replace(/\n/g, '').replace(/ /g, 'S').replace(/_/g, 'U').replace(/\|/g, 'P');
+        let letters = entry.replace(/\n/g, '').replace(/ /g, 'S').replace(/_/g, 'U').replace(/\|/g, 'P');
         // break string into array of threes
-        let b = a.match(/.{1,3}/g);
+        let triplets = letters.match(/.{1,3}/g);
         // put all triplets for each num together
         let codes = ['', '', '', '', '', '', '', '', ''];
         for (let i = 0; i < codes.length; i++) {
-            codes[i] = codes[i].concat(b[i]).concat(b[i + 9]).concat(b[i + 18]);
+            codes[i] = codes[i].concat(triplets[i]).concat(triplets[i + 9]).concat(triplets[i + 18]);
         }
         // sub code for its num
-        return parseInt((codes.map(code => this.key[code])).join(''),10);
+        return parseInt((codes.map(code => this.key[code])).join(''), 10);
+    }
+
+    parse() {
+        let entries = this.readEntriesFromFile();
+        let entriesArr = this.divideEntries(entries);
+        return entriesArr.map((entry) => this.transformEntry(entry));
     }
 }
 
