@@ -30,7 +30,7 @@ class Bank {
             codes[i] = codes[i].concat(b[i]).concat(b[i + 9]).concat(b[i + 18]);
         }
         // sub code for its num
-        return codes.map(code => this.key[code]);
+        return parseInt((codes.map(code => this.key[code])).join(''),10);
     }
 }
 
