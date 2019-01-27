@@ -48,6 +48,10 @@ class Bank {
         let entriesArr = this.divideEntries(entries);
         return entriesArr.map((entry) => this.transformEntry(entry));
     }
+
+    validateActNum() {
+        return true;
+    }
 }
 
 module.exports = Bank;
