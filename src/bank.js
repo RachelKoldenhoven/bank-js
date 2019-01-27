@@ -49,8 +49,13 @@ class Bank {
         return entriesArr.map((entry) => this.transformEntry(entry));
     }
 
-    validateActNum() {
-        return true;
+    validateActNum(actNum) {
+        let numArr = actNum.toString().split('').reverse();
+        let sum = 0;
+        for (let i = 0; i < numArr.length; i++) {
+            sum += (i + 1) * numArr[i];
+        }
+        return sum % 11 === 0;
     }
 }
 
